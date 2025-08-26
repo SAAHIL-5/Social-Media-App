@@ -152,7 +152,7 @@ const { userId } = req. auth()
 const { id } = req.body;
 
 const user = await User.findById(userId)
-user. following = user.following.filter(user=> user !== id);
+user.following = user.following.filter(user=> user !== id);
 await user.save()
 
 const toUser = await User.findById(id)
@@ -175,18 +175,17 @@ const { id } = req.body;
 
 // Check if user has sent more than 20 connection requests in the last 24 hours
 const last24Hours = new Date(Date.now() - 24 * 60 * 60 * 1000)
-const connectionRequests = await Connection.find({from_user_id: userId,
-created_at: { $gt: last24Hours }})
+const connectionRequests = await Connection.find({from_user_id: userId,created_at: { $gt: last24Hours }})
 if(connectionRequests.length >= 20){
 return res.json({success: false, 
     message: 'You have sent more than 20 connection requests in the last 24 hours'})
 }
 
 // Check if users are already conected
-const connection = await Connection. findOne({
+const connection = await Connection.findOne({
 $or: [
-{rom_user_id: userId, to_user_id: id},
-{rom_user_id: id, to_user_id: userId},
+{from_user_id: userId, to_user_id: id},
+{from_user_id: id, to_user_id: userId},
 ]
 })
 
@@ -200,7 +199,7 @@ return res.json({success: true, message: 'Connection request sent successfully'}
     return res.json({success: false, message: 'You are already connected with this user'})
 }
 
-return res. json({success: false, message: 'Connection request pending'})
+return res.json({success: false, message: 'Connection request pending'})
 
 } catch (error) {
    console.log(error);
@@ -214,9 +213,9 @@ try {
 const {userId} = req.auth()
 const user = await User.findById(userId).populate('connections followers following')
 
-const connections = user.connections
-const followers = user.followers
-const following = user.following
+const connections = user.connections;
+const followers = user.followers;
+const following = user.following;
 
 const pendingConnections = (await Connection.find({to_user_id: userId,
 status: 'pending' }).populate('from_user_id' )).map(connection=>connection.from_user_id)
