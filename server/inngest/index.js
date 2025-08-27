@@ -151,7 +151,7 @@ unseenCount[message.to_user_id._id] = (unseenCount[message.to_user_id._id] || 0)
 for (const userId in unseenCount) {
 const user = await User.findById(userId);
 
-const subject = `You have ${unseenCount[userId]} unseen messages` ;
+const subject =`📬 You have ${unseenCount[userId]} unseen messages` ;
 
 const body= `
 <div style="font-family: Arial, sans-serif; padding: 20px;">
