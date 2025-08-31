@@ -73,12 +73,10 @@ await step.run('send-connection-request-mail', async () => {
 const connection = await Connection.findById(connectionId).populate('from_user_id to_user_id');
 const subject = `👋 New Connection Request`;
 const body = `
-<div.style="font-family: Arial, sans-serif; padding: 20px;">
-h2>Hi ${connection.to_user_id.full_name}, </h2>
-<p>You have a new connection request from ${connection.from_user_id.
-full_name} - @${connection.from_user_id.username}</p>
-<p>Click <a href="${process.env.FRONTEND_URL}/connections" style="color:
-#10b981;">here</a> to accept or reject the request</p>
+<div style="font-family: Arial, sans-serif; padding: 20px;">
+<h2>Hi ${connection.to_user_id.full_name},</h2>
+<p>You have a new connection request from ${connection.from_user_id.full_name} - @${connection.from_user_id.username}</p>
+<p>Click <a href="${process.env.FRONTEND_URL}/connections" style="color:#10b981;">here</a> to accept or reject the request</p>
 <br/>
 <p>Thanks,<br/>Konnect - Stay Connected</p>
 </div>`;
@@ -101,12 +99,10 @@ return {message: "Already accepted"}
 
 const subject = `👋 New Connection Request`;
 const body = `
-<div.style="font-family: Arial, sans-serif; padding: 20px;">
-<h2> Hi ${connection.to_user_id.full_name}, </h2>
-<p>You have a new connection request from ${connection.from_user_id.
-full_name} - @${connection.from_user_id.username}</p>
-<p>Click <a href="${process.env.FRONTEND_URL}/connections" style="color:
-#10b981;">here</a> to accept or reject the request</p>
+<div style="font-family: Arial, sans-serif; padding: 20px;">
+<h2>Hi ${connection.to_user_id.full_name},</h2>
+<p>You have a new connection request from ${connection.from_user_id.full_name} - @${connection.from_user_id.username}</p>
+<p>Click <a href="${process.env.FRONTEND_URL}/connections" style="color:#10b981;">here</a> to accept or reject the request</p>
 <br/>
 <p>Thanks,<br/>Konnect - Stay Connected</p>
 </div>`;
@@ -155,10 +151,9 @@ const subject =`📬 You have ${unseenCount[userId]} unseen messages` ;
 
 const body= `
 <div style="font-family: Arial, sans-serif; padding: 20px;">
-<h2>Hi ${user.full_name}, </h2>
+<h2>Hi ${user.full_name},</h2>
 <p>You have ${unseenCount[userId]} unseen messages</p>
-<p>Click <a href="${process.env.FRONTEND_URL}/messages" style="color: #10b981;
-">here</a> to view them</p>
+<p>Click <a href="${process.env.FRONTEND_URL}/messages" style="color: #10b981;">here</a> to view them</p>
 <br/>
 <p>Thanks,<br/>Konnect - Stay Connected</p>
 </div>
